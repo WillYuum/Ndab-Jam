@@ -16,6 +16,7 @@ public class PlayerControls : MonoBehaviour
 
     void Update()
     {
+        MakePlayerLookAtPointer();
         HandlePlayerMovement();
     }
 
@@ -31,4 +32,14 @@ public class PlayerControls : MonoBehaviour
         position = position + move * playeSpeed * Time.deltaTime;
         rb.MovePosition(position);
     }
+
+
+    void MakePlayerLookAtPointer()
+    {
+        Vector2 mousePos = Input.mousePosition;
+        Vector2 playerPos = Camera.main.WorldToScreenPoint(this.transform.position);
+        Vector2 direction = new Vector2(mousePos.x, mousePos.y) - new Vector2(playerPos.x, playerPos.y);
+        float angle = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg;
+        this.transform.rotation = Quaternion.Euler(new Vector3(0, 0, -angle));
+    }   
 }
