@@ -40,11 +40,11 @@ GameObject:
   m_Component:
   - component: {fileID: 4367312722084589208}
   - component: {fileID: 4367312722084589191}
-  - component: {fileID: 4367312722084589209}
   - component: {fileID: 1948260917687984396}
   - component: {fileID: 4367312722084589190}
   - component: {fileID: 714416846}
   - component: {fileID: 561875293293763040}
+  - component: {fileID: 1099658492}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -117,27 +117,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!50 &4367312722084589209
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4367312722084589189}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!114 &1948260917687984396
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -152,8 +131,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startingHealth: 100
   currentHealth: 0
-  holdingPosition: {fileID: 0}
-  closeToCiv: 0
+  holdingPosition: {fileID: 80844910}
+  isHoldingCiv: 0
+  currentholdingCiv: {fileID: 0}
+  throwForce: 10
   currentCloseCiv: {fileID: 0}
 --- !u!114 &4367312722084589190
 MonoBehaviour:
@@ -209,5 +190,28 @@ MonoBehaviour:
   startingHealth: 100
   currentHealth: 0
   holdingPosition: {fileID: 80844910}
-  closeToCiv: 0
+  isHoldingCiv: 0
+  currentholdingCiv: {fileID: 0}
+  throwForce: 800
   currentCloseCiv: {fileID: 0}
+--- !u!50 &1099658492
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4367312722084589189}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

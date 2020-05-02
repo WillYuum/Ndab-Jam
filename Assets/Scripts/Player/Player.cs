@@ -19,7 +19,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (closeToCiv)
+        if (closeToCiv && isHoldingCiv == false)
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
@@ -33,6 +33,7 @@ public class Player : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
                 Debug.Log("Throwing Civ");
+                ThrowCivilian();
             }
         }
     }
@@ -44,14 +45,19 @@ public class Player : MonoBehaviour
         if (closeToCiv = false || currentCloseCiv == null) return;
 
         currentCloseCiv.transform.position = holdingPosition.transform.position;
-        currentCloseCiv.transform.parent = holdingPosition.transform;
+        currentCloseCiv.transform.SetParent(holdingPosition.transform);
         currentholdingCiv = currentCloseCiv;
         isHoldingCiv = true;
     }
 
+    public float throwForce = 40.0f;
     public void ThrowCivilian()
     {
         isHoldingCiv = false;
+        currentholdingCiv.transform.parent = null;
+        currentholdingCiv.AddComponent<Rigidbody2D>().gravityScale = 0;
+        currentholdingCiv.GetComponent<Rigidbody2D>().AddForce(transform.up * throwForce);
+        currentholdingCiv = null;
     }
 
 
