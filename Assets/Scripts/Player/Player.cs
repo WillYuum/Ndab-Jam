@@ -5,6 +5,9 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
 
+
+    public GameObject cameraPos;
+
     public float startingHealth = 100f;
     [HideInInspector]public float currentHealth;
 
@@ -19,6 +22,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        cameraPos.transform.position = new Vector3(transform.position.x,transform.position.y, -10);
         if (closeToCiv && isHoldingCiv == false)
         {
             if (Input.GetKeyDown(KeyCode.E))
@@ -43,11 +47,11 @@ public class Player : MonoBehaviour
     public void GrabCivilian()
     {
         if (closeToCiv = false || currentCloseCiv == null) return;
-
         currentCloseCiv.transform.position = holdingPosition.transform.position;
         currentCloseCiv.transform.SetParent(holdingPosition.transform);
         currentholdingCiv = currentCloseCiv;
         isHoldingCiv = true;
+        closeToCiv = false;
     }
 
     public float throwForce = 40.0f;
@@ -55,7 +59,7 @@ public class Player : MonoBehaviour
     {
         isHoldingCiv = false;
         currentholdingCiv.transform.parent = null;
-        currentholdingCiv.AddComponent<Rigidbody2D>().gravityScale = 0;
+        currentholdingCiv.AddComponent<Rigidbody2D>();
         currentholdingCiv.GetComponent<Rigidbody2D>().AddForce(transform.up * throwForce);
         currentholdingCiv = null;
     }
@@ -75,6 +79,6 @@ public class Player : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        
+        closeToCiv = false;
     }
 }
