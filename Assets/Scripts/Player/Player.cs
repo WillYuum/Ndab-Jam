@@ -27,21 +27,41 @@ public class Player : MonoBehaviour
                 GrabCivilian();
             }
         }
+
+        if (isHoldingCiv)
+        {
+            if (Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                Debug.Log("Throwing Civ");
+            }
+        }
     }
 
+    [HideInInspector] public bool isHoldingCiv = false;
+    [HideInInspector] public GameObject currentholdingCiv;
     public void GrabCivilian()
     {
+        if (closeToCiv = false || currentCloseCiv == null) return;
+
         currentCloseCiv.transform.position = holdingPosition.transform.position;
         currentCloseCiv.transform.parent = holdingPosition.transform;
+        currentholdingCiv = currentCloseCiv;
+        isHoldingCiv = true;
+    }
+
+    public void ThrowCivilian()
+    {
+        isHoldingCiv = false;
     }
 
 
-    [HideInInspector] public bool closeToCiv = false;
+    [HideInInspector] private bool closeToCiv = false;
     [HideInInspector] public GameObject currentCloseCiv;
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Civilian"))
         {
+            Debug.Log("close to civ");
             closeToCiv = true;
             currentCloseCiv = other.gameObject;
         }
