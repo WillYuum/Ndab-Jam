@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
         introBackground.SetActive(false);
+        AudioManager.instance.Play("Bgm");
     }
 
     public void WinGame()

@@ -31,7 +31,6 @@ public class PlayerControls : MonoBehaviour
         Vector2 move = new Vector2(horizontal, vertical);
 
         currentPlayerSpeed = HandlePlayerSpeedChangeOnMomentum();
-        Debug.Log(currentPlayerSpeed);
 
         Vector2 position = rb.position;
         position = position + move * currentPlayerSpeed * Time.deltaTime;
