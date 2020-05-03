@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
         currentTimer = 180f;
         gameTimerText.text = "00:00";
         WinScreen.SetActive(false);
-        loseScreen.SetActive(true);
+        loseScreen.SetActive(false);
     }
 
     void Update()
@@ -124,7 +124,7 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         WinScreen.SetActive(false);
-        loseScreen.SetActive(true);
+        loseScreen.SetActive(false);
     }
 
     public GameObject loseScreen;
