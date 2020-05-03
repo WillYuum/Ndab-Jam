@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class PlayerControls : MonoBehaviour
 {
-
-    public int playeSpeed = 10;
+    public float basePlayerSpeed = 10;
+    public float currentPlayerSpeed;
     Rigidbody2D rb;
+    public MomentumManager momentum;
 
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        momentum = GameManager.instance.GetComponent<MomentumManager>();
     }
 
     void Update()
@@ -28,8 +30,11 @@ public class PlayerControls : MonoBehaviour
 
         Vector2 move = new Vector2(horizontal, vertical);
 
+        currentPlayerSpeed = HandlePlayerSpeedChangeOnMomentum();
+        Debug.Log(currentPlayerSpeed);
+
         Vector2 position = rb.position;
-        position = position + move * playeSpeed * Time.deltaTime;
+        position = position + move * currentPlayerSpeed * Time.deltaTime;
         rb.MovePosition(position);
     }
 
@@ -41,5 +46,12 @@ public class PlayerControls : MonoBehaviour
         Vector2 direction = new Vector2(mousePos.x, mousePos.y) - new Vector2(playerPos.x, playerPos.y);
         float angle = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg;
         this.transform.rotation = Quaternion.Euler(new Vector3(0, 0, -angle));
-    }   
+    }
+
+    public float HandlePlayerSpeedChangeOnMomentum()
+    {
+        float momentumValue = momentum.momentumBar.value * 10;
+        float currentSpeed = basePlayerSpeed + momentumValue;
+        return currentSpeed;
+    }
 }

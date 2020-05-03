@@ -5,10 +5,8 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     private Camera cam;
-    private float targetZoom;
-    private float zoomFactor = 3f;
     private float zoomLerpSpeed = 10;
-    private float originalCamZooom;
+
 
     public float minZoom;
     public float maxZoom;
@@ -18,7 +16,7 @@ public class CameraController : MonoBehaviour
         cam.orthographicSize = minZoom;
     }
 
-    private bool zoomedOut = false;
+    //private bool zoomedOut = false;
     void Update()
     {
         if (Input.GetKey(KeyCode.LeftShift))

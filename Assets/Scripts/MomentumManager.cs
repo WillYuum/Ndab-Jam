@@ -7,6 +7,7 @@ public class MomentumManager : MonoBehaviour
 {
 
     public Slider momentumBar;
+    public float momentumBaseLoss = 0.02f;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,7 +26,7 @@ public class MomentumManager : MonoBehaviour
     public void HandleDecreasingMomentum()
     {
         //check if player is holding someone
-        DecreaseAmount(0.05f);
+        DecreaseAmount(momentumBaseLoss);
     }
 
     public void IncreaseMomentum(float amount)
