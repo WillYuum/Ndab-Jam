@@ -13,9 +13,14 @@ public class Player : MonoBehaviour
 
     public GameObject holdingPosition;
 
+    private MomentumManager momentumBar;
+    public float amountOfMomentumOnHold = 0.05f;
+    public float amountOfMomentumOnThrow = 0.09f;
+
     // Start is called before the first frame update
     void Start()
     {
+        momentumBar = GameManager.instance.GetComponent<MomentumManager>();
         currentHealth = startingHealth;
     }
 
@@ -50,6 +55,10 @@ public class Player : MonoBehaviour
         currentCloseCiv.transform.position = holdingPosition.transform.position;
         currentCloseCiv.transform.SetParent(holdingPosition.transform);
         currentholdingCiv = currentCloseCiv;
+        currentCloseCiv.GetComponent<PolygonCollider2D>().enabled = false;
+
+        momentumBar.IncreaseMomentum(amountOfMomentumOnHold);
+
         isHoldingCiv = true;
         closeToCiv = false;
     }
@@ -59,8 +68,9 @@ public class Player : MonoBehaviour
     {
         isHoldingCiv = false;
         currentholdingCiv.transform.parent = null;
-        currentholdingCiv.AddComponent<Rigidbody2D>();
+        currentholdingCiv.AddComponent<Rigidbody2D>().gravityScale = 0;
         currentholdingCiv.GetComponent<Rigidbody2D>().AddForce(transform.up * throwForce);
+        currentholdingCiv.GetComponent<PolygonCollider2D>().enabled = true;
         currentholdingCiv = null;
     }
 

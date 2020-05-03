@@ -19,12 +19,7 @@ public class MomentumManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        momentumTimer += 1 * Time.deltaTime;
-        if(momentumTimer >= delay)
-        {
-            momentumTimer = 0;
-            HandleDecreasingMomentum();
-        }
+        HandleDecreasingMomentum();
     }
 
     public void HandleDecreasingMomentum()
@@ -38,8 +33,8 @@ public class MomentumManager : MonoBehaviour
         momentumBar.value += amount;
     }
 
-    public void DecreaseAmount(float amout)
+    private void DecreaseAmount(float amount)
     {
-
+        momentumBar.value -= amount * Time.deltaTime;
     }
 }
