@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
         }
         else if (instance != null)
         {
@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour
         currentTimer = 180f;
         gameTimerText.text = "00:00";
         WinScreen.SetActive(false);
+        loseScreen.SetActive(true);
     }
 
     void Update()
@@ -60,6 +61,21 @@ public class GameManager : MonoBehaviour
 
         gameTimerText.text = minutes.ToString("00") + ":" + seconds.ToString("00");
 
+        if(minutes <= 1)
+        {
+            spawnManager.spawnDelay = 2f;
+
+            if (seconds <= 30)
+            {
+                spawnManager.spawnDelay = 1.75f;
+            }
+        }
+
+        if(seconds <= 30)
+        {
+            spawnManager.spawnDelay = 1.5f;
+        }
+
         if(minutes <= 0)
         {
             if(seconds <= 0)
@@ -71,11 +87,13 @@ public class GameManager : MonoBehaviour
 
     public GameObject ToiletPaperImage;
     [HideInInspector] public int toiletPapersCollected = 0;
+    int amountOfPeopleNdab = 0;
     public Text toiletPaperAmountText;
     public void AddToiletPaper(int amount)
     {
         ToiletPaperImage.transform.DOShakeScale(20 * Time.deltaTime);
         toiletPapersCollected += amount;
+        amountOfPeopleNdab += 1;
         toiletPaperAmountText.text = toiletPapersCollected.ToString("00");
     }
 
@@ -84,6 +102,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector]public bool gameIsOn = false;
     public void StartGame()
     {
+        WinScreen.SetActive(false);
         introBackground.SetActive(false);
         AudioManager.instance.Play("Bgm");
         gameIsOn = true;
@@ -97,17 +116,21 @@ public class GameManager : MonoBehaviour
     {
         WinScreen.SetActive(true);
         gameIsOn = false;
-        winText.text = $"{toiletPapersCollected:00} people have been packed and ndabbed";
+        winText.text = $"{amountOfPeopleNdab:00} people have been packed and ndabbed and got {toiletPapersCollected:00}";
         AudioManager.instance.Stop("Bgm");
     }
 
     public void RestartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        WinScreen.SetActive(false);
+        loseScreen.SetActive(true);
     }
 
+    public GameObject loseScreen;
     public void LoseGame()
     {
+        loseScreen.SetActive(true);
         gameIsOn = false;
     }
 

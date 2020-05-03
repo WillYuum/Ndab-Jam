@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerControls : MonoBehaviour
 {
-    public float basePlayerSpeed = 10;
+    public float basePlayerSpeed = 3;
     public float currentPlayerSpeed;
     Rigidbody2D rb;
     public MomentumManager momentum;
@@ -31,7 +31,7 @@ public class PlayerControls : MonoBehaviour
         Vector2 move = new Vector2(horizontal, vertical);
 
         currentPlayerSpeed = HandlePlayerSpeedChangeOnMomentum();
-
+        Debug.Log(currentPlayerSpeed);
         Vector2 position = rb.position;
         position = position + move * currentPlayerSpeed * Time.deltaTime;
         rb.MovePosition(position);

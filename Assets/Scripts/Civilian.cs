@@ -42,6 +42,7 @@ public class Civilian : MonoBehaviour
         }
     }
 
+    //string[] sfx = {"WomanScree"}
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.CompareTag("House") && GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().isHoldingCiv == false)

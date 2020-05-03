@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
     public GameObject cameraPos;
 
     public float startingHealth = 100f;
-    [HideInInspector]public float currentHealth;
+    [HideInInspector] public float currentHealth;
 
     public GameObject holdingPosition;
 
@@ -27,28 +27,31 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        cameraPos.transform.position = new Vector3(transform.position.x,transform.position.y, -10);
-        if (closeToCiv && isHoldingCiv == false)
+        cameraPos.transform.position = new Vector3(transform.position.x, transform.position.y, -10);
+        if (closeToCiv || isHoldingCiv)
         {
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                //grab civilian
-                GrabCivilian();
-            }
-        }
-
-        if (isHoldingCiv)
-        {
+            
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
-                Debug.Log("Throwing Civ");
-                ThrowCivilian();
+                //grab civilian
+                if (isHoldingCiv == false)
+                {
+                GrabCivilian();
+
+                }
+                else
+                {
+                    Debug.Log("Throwing Civ");
+                    ThrowCivilian();
+                }
             }
         }
     }
 
     [HideInInspector] public bool isHoldingCiv = false;
     [HideInInspector] public GameObject currentholdingCiv;
+    public Sprite holdingImage;
+    public Sprite normalImage;
     public void GrabCivilian()
     {
         if (closeToCiv = false || currentCloseCiv == null) return;
@@ -59,7 +62,7 @@ public class Player : MonoBehaviour
         currentCloseCiv.GetComponent<Civilian>().isHeldByPlayer = true;
         momentumBar.IncreaseMomentum(amountOfMomentumOnHold);
         AudioManager.instance.Play("Whoosh");
-
+        GetComponent<SpriteRenderer>().sprite = holdingImage;
         isHoldingCiv = true;
         closeToCiv = false;
     }
@@ -73,6 +76,8 @@ public class Player : MonoBehaviour
         currentholdingCiv.GetComponent<Rigidbody2D>().AddForce(transform.up * throwForce);
         currentholdingCiv.GetComponent<PolygonCollider2D>().enabled = true;
         currentholdingCiv = null;
+        GetComponent<SpriteRenderer>().sprite = normalImage;
+        GameManager.instance.spawnManager.DecreasePoeple();
     }
 
 

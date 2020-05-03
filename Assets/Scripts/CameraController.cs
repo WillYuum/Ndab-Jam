@@ -22,10 +22,12 @@ public class CameraController : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftShift))
         {
             cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, maxZoom, Time.deltaTime * zoomLerpSpeed);
+            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControls>().basePlayerSpeed = 1;
         }
         else
         {
             cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, minZoom, Time.deltaTime * zoomLerpSpeed);
+            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControls>().basePlayerSpeed = 3;
         }
     }
 }
