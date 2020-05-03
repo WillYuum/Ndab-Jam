@@ -20,6 +20,8 @@ public class Civilian : MonoBehaviour
         momentumBar = GameManager.instance.GetComponent<MomentumManager>();
         pointsToMove = GameObject.FindGameObjectsWithTag("pointToMove");
     }
+
+    public bool isHeldByPlayer = false;
    
     private void Update()
     {
@@ -30,7 +32,7 @@ public class Civilian : MonoBehaviour
             MoveToAnotherPos();
         }
 
-        if (canMove)
+        if (canMove && isHeldByPlayer == false)
         {
             transform.position = Vector2.Lerp(transform.position, selectedPointToGoTo.position, 1 * Time.deltaTime);
             if(transform.position == selectedPointToGoTo.position)
@@ -46,6 +48,8 @@ public class Civilian : MonoBehaviour
         {
             Destroy(gameObject);
             momentumBar.IncreaseMomentum(amountOfMomentumOnHit);
+            GameManager.instance.AddToiletPaper(5);
+            AudioManager.instance.Play("Boom");
         }
         else
         {

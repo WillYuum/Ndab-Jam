@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using DG.Tweening;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -9,7 +10,7 @@ public class GameManager : MonoBehaviour
 
     public static GameManager instance = null;
 
-    public SpawnManager spawnManager;
+    [HideInInspector]public SpawnManager spawnManager;
 
     public Text gameTimerText;
     [HideInInspector]public float startingTimer = 5f;
@@ -33,6 +34,7 @@ public class GameManager : MonoBehaviour
         spawnManager = GameManager.instance.GetComponent<SpawnManager>();
         currentTimer = 180f;
         gameTimerText.text = "00:00";
+        WinScreen.SetActive(false);
     }
 
     void Update()
@@ -57,6 +59,24 @@ public class GameManager : MonoBehaviour
         }
 
         gameTimerText.text = minutes.ToString("00") + ":" + seconds.ToString("00");
+
+        if(minutes <= 0)
+        {
+            if(seconds <= 0)
+            {
+                WinGame();
+            }
+        }
+    }
+
+    public GameObject ToiletPaperImage;
+    [HideInInspector] public int toiletPapersCollected = 0;
+    public Text toiletPaperAmountText;
+    public void AddToiletPaper(int amount)
+    {
+        ToiletPaperImage.transform.DOShakeScale(20 * Time.deltaTime);
+        toiletPapersCollected += amount;
+        toiletPaperAmountText.text = toiletPapersCollected.ToString("00");
     }
 
 
@@ -70,9 +90,15 @@ public class GameManager : MonoBehaviour
         StartCoroutine(spawnManager.SpawnEnemies());
     }
 
+
+    public GameObject WinScreen;
+    public Text winText;
     public void WinGame()
     {
-
+        WinScreen.SetActive(true);
+        gameIsOn = false;
+        winText.text = $"{toiletPapersCollected:00} people have been packed and ndabbed";
+        AudioManager.instance.Stop("Bgm");
     }
 
     public void RestartGame()

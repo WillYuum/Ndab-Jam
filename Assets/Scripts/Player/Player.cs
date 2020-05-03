@@ -56,8 +56,9 @@ public class Player : MonoBehaviour
         currentCloseCiv.transform.SetParent(holdingPosition.transform);
         currentholdingCiv = currentCloseCiv;
         currentCloseCiv.GetComponent<PolygonCollider2D>().enabled = false;
-        currentCloseCiv.GetComponent<Civilian>().canMove = false;
+        currentCloseCiv.GetComponent<Civilian>().isHeldByPlayer = true;
         momentumBar.IncreaseMomentum(amountOfMomentumOnHold);
+        AudioManager.instance.Play("Whoosh");
 
         isHoldingCiv = true;
         closeToCiv = false;
