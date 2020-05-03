@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
 
     public static GameManager instance = null;
 
+    public SpawnManager spawnManager;
+
     public Text gameTimerText;
     [HideInInspector]public float startingTimer = 5f;
     [HideInInspector] public float currentTimer;
@@ -28,6 +30,7 @@ public class GameManager : MonoBehaviour
 
     public void Start()
     {
+        spawnManager = GameManager.instance.GetComponent<SpawnManager>();
         currentTimer = 180f;
         gameTimerText.text = "00:00";
     }
@@ -64,6 +67,7 @@ public class GameManager : MonoBehaviour
         introBackground.SetActive(false);
         AudioManager.instance.Play("Bgm");
         gameIsOn = true;
+        StartCoroutine(spawnManager.SpawnEnemies());
     }
 
     public void WinGame()
@@ -78,7 +82,7 @@ public class GameManager : MonoBehaviour
 
     public void LoseGame()
     {
-
+        gameIsOn = false;
     }
 
     public void ExitGame()

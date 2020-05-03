@@ -21,7 +21,6 @@ public class CameraController : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            Debug.Log("clicked shit");
             cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, maxZoom, Time.deltaTime * zoomLerpSpeed);
         }
         else
