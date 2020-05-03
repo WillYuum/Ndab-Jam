@@ -2,11 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
 
     public static GameManager instance = null;
+
+    public Text gameTimerText;
+    public float startingTimer = 1200;
+    [HideInInspector] public float currentTimer;
 
     private void Awake()
     {
@@ -21,12 +26,24 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void Start()
+    {
+        //currentTimer = startingTimer;
+        //StartCoundownTimer();
+    }
+
+    void Update()
+    {
+        //UpdateTimer();
+    }
+
 
     public GameObject introBackground;
     public void StartGame()
     {
         introBackground.SetActive(false);
         AudioManager.instance.Play("Bgm");
+        //StartCoundownTimer();
     }
 
     public void WinGame()
