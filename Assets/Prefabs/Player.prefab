@@ -192,7 +192,8 @@ MonoBehaviour:
   startingHealth: 100
   currentHealth: 0
   holdingPosition: {fileID: 5276669646628498579}
-  momentumBar: {fileID: 0}
+  amountOfMomentumOnHold: 0.05
+  amountOfMomentumOnThrow: 0.09
   isHoldingCiv: 0
   currentholdingCiv: {fileID: 0}
   throwForce: 800

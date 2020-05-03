@@ -367,11 +367,6 @@ PrefabInstance:
       propertyPath: Player
       value: 
       objectReference: {fileID: 1592224287}
-    - target: {fileID: 1273765998636093477, guid: b952a6b53955c3347b0490001884fd27,
-        type: 3}
-      propertyPath: momentumBar
-      value: 
-      objectReference: {fileID: 561653081}
     - target: {fileID: 1273765998636093478, guid: b952a6b53955c3347b0490001884fd27,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1619,11 +1614,6 @@ PrefabInstance:
       propertyPath: Player
       value: 
       objectReference: {fileID: 1592224287}
-    - target: {fileID: 1273765998636093477, guid: b952a6b53955c3347b0490001884fd27,
-        type: 3}
-      propertyPath: momentumBar
-      value: 
-      objectReference: {fileID: 561653081}
     - target: {fileID: 1273765998636093478, guid: b952a6b53955c3347b0490001884fd27,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1842,11 +1832,6 @@ PrefabInstance:
       propertyPath: cameraPos
       value: 
       objectReference: {fileID: 519420028}
-    - target: {fileID: 5276669647649391101, guid: acd768afe5e959a4486b9eb0cac43c9a,
-        type: 3}
-      propertyPath: momentumBar
-      value: 
-      objectReference: {fileID: 561653081}
     - target: {fileID: 5276669647649391103, guid: acd768afe5e959a4486b9eb0cac43c9a,
         type: 3}
       propertyPath: m_LocalPosition.x
