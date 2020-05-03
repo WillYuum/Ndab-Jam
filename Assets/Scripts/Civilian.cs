@@ -22,5 +22,9 @@ public class Civilian : MonoBehaviour
             Destroy(gameObject);
             momentumBar.IncreaseMomentum(amountOfMomentumOnHit);
         }
+        else
+        {
+            Destroy(GetComponent<Rigidbody2D>());
+        }
     }
 }
