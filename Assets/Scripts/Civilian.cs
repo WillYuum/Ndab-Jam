@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 public class Civilian : MonoBehaviour
@@ -7,12 +8,36 @@ public class Civilian : MonoBehaviour
 
     //public GameObject Player;
 
+    float delay;
+    float startingDelayTime = 3;
+
     private MomentumManager momentumBar;
     public float amountOfMomentumOnHit = 0.1f;
-
+    public GameObject[] pointsToMove;
     private void Start()
     {
+        delay = startingDelayTime;
         momentumBar = GameManager.instance.GetComponent<MomentumManager>();
+        pointsToMove = GameObject.FindGameObjectsWithTag("pointToMove");
+    }
+   
+    private void Update()
+    {
+        delay -= Time.deltaTime;
+        if(delay <= 0)
+        {
+            delay = startingDelayTime;
+            MoveToAnotherPos();
+        }
+
+        if (canMove)
+        {
+            transform.position = Vector2.Lerp(transform.position, selectedPointToGoTo.position, 1 * Time.deltaTime);
+            if(transform.position == selectedPointToGoTo.position)
+            {
+                canMove = false;
+            }
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -25,6 +50,35 @@ public class Civilian : MonoBehaviour
         else
         {
             Destroy(GetComponent<Rigidbody2D>());
+        }
+    }
+    public bool canMove = false;
+    Transform selectedPointToGoTo;
+    //expected to be 2
+    int amoutToSearchForNextPos = 0;
+    public void MoveToAnotherPos()
+    {
+        List<GameObject> pointToGoTo = new List<GameObject>();
+        for(int i = 0; i < pointsToMove.Length; i++)
+        {
+            GameObject selectedPoint = pointsToMove[i];
+            float distance = Vector2.Distance(transform.position, selectedPoint.transform.position);
+            Debug.Log(distance);
+            if (distance < 2)
+            {
+                Debug.Log("adding a poin!!!!");
+                amoutToSearchForNextPos += 1;
+                pointToGoTo.Add(selectedPoint);
+                if(amoutToSearchForNextPos >= 2)
+                {
+                    Debug.Log("moving!!!!!!");
+                    amoutToSearchForNextPos = 0;
+                    int randNum = Random.Range(0, pointToGoTo.Count);
+                    selectedPointToGoTo = pointToGoTo[randNum].transform;
+                    canMove = true;
+                    break;
+                }
+            }
         }
     }
 }

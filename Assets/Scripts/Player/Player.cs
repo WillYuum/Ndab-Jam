@@ -56,7 +56,7 @@ public class Player : MonoBehaviour
         currentCloseCiv.transform.SetParent(holdingPosition.transform);
         currentholdingCiv = currentCloseCiv;
         currentCloseCiv.GetComponent<PolygonCollider2D>().enabled = false;
-
+        currentCloseCiv.GetComponent<Civilian>().canMove = false;
         momentumBar.IncreaseMomentum(amountOfMomentumOnHold);
 
         isHoldingCiv = true;
