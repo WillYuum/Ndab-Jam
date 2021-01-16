@@ -12,8 +12,12 @@ public class Civilian : MonoBehaviour
     private MomentumManager momentumBar;
     public float amountOfMomentumOnHit = 0.1f;
     public GameObject[] pointsToMove;
+
+    [HideInInspector]
+    public Rigidbody2D civRB;
     private void Start()
     {
+        civRB = GetComponent<Rigidbody2D>();
         delay = startingDelayTime;
         momentumBar = GameManager.instance.GetComponent<MomentumManager>();
         pointsToMove = GameObject.FindGameObjectsWithTag("pointToMove");
@@ -52,7 +56,7 @@ public class Civilian : MonoBehaviour
         }
         else
         {
-            Destroy(GetComponent<Rigidbody2D>());
+            // Destroy(GetComponent<Rigidbody2D>());
         }
     }
     public bool canMove = false;
@@ -66,15 +70,13 @@ public class Civilian : MonoBehaviour
         {
             GameObject selectedPoint = pointsToMove[i];
             float distance = Vector2.Distance(transform.position, selectedPoint.transform.position);
-            Debug.Log(distance);
+
             if (distance < 2)
             {
-                Debug.Log("adding a poin!!!!");
                 amoutToSearchForNextPos += 1;
                 pointToGoTo.Add(selectedPoint);
                 if (amoutToSearchForNextPos >= 2)
                 {
-                    Debug.Log("moving!!!!!!");
                     amoutToSearchForNextPos = 0;
                     int randNum = Random.Range(0, pointToGoTo.Count);
                     selectedPointToGoTo = pointToGoTo[randNum].transform;

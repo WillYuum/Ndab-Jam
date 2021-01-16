@@ -1,18 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerControls : MonoBehaviour
 {
     public float basePlayerSpeed = 3;
-    public float currentPlayerSpeed;
-    Rigidbody2D rb;
+    private float currentPlayerSpeed = 2.0f;
+    // Rigidbody2D rb;
     public MomentumManager momentum;
 
 
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
         momentum = GameManager.instance.GetComponent<MomentumManager>();
     }
 
@@ -25,16 +22,10 @@ public class PlayerControls : MonoBehaviour
 
     private void HandlePlayerMovement()
     {
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
+        float horizontal = Input.GetAxis("Horizontal") * currentPlayerSpeed * Time.deltaTime;
+        float vertical = Input.GetAxis("Vertical") * currentPlayerSpeed * Time.deltaTime;
 
-        Vector2 move = new Vector2(horizontal, vertical);
-
-        currentPlayerSpeed = HandlePlayerSpeedChangeOnMomentum();
-        Debug.Log(currentPlayerSpeed);
-        Vector2 position = rb.position;
-        position = position + move * currentPlayerSpeed * Time.deltaTime;
-        rb.MovePosition(position);
+        transform.position += new Vector3(horizontal, vertical, 0);
     }
 
 
