@@ -70,15 +70,13 @@ public class Civilian : MonoBehaviour
         {
             GameObject selectedPoint = pointsToMove[i];
             float distance = Vector2.Distance(transform.position, selectedPoint.transform.position);
-            Debug.Log(distance);
+
             if (distance < 2)
             {
-                Debug.Log("adding a poin!!!!");
                 amoutToSearchForNextPos += 1;
                 pointToGoTo.Add(selectedPoint);
                 if (amoutToSearchForNextPos >= 2)
                 {
-                    Debug.Log("moving!!!!!!");
                     amoutToSearchForNextPos = 0;
                     int randNum = Random.Range(0, pointToGoTo.Count);
                     selectedPointToGoTo = pointToGoTo[randNum].transform;
