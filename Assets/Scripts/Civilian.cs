@@ -56,7 +56,7 @@ public class Civilian : MonoBehaviour
         }
         else
         {
-            Destroy(GetComponent<Rigidbody2D>());
+            // Destroy(GetComponent<Rigidbody2D>());
         }
     }
     public bool canMove = false;

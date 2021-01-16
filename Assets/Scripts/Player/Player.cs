@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Player : MonoBehaviour
 {
@@ -8,7 +6,6 @@ public class Player : MonoBehaviour
 
     public GameObject cameraPos;
 
-    public float startingHealth = 100f;
     [HideInInspector] public float currentHealth;
 
     public GameObject holdingPosition;
@@ -21,7 +18,6 @@ public class Player : MonoBehaviour
     void Start()
     {
         momentumBar = GameManager.instance.GetComponent<MomentumManager>();
-        currentHealth = startingHealth;
     }
 
     // Update is called once per frame
@@ -30,13 +26,13 @@ public class Player : MonoBehaviour
         cameraPos.transform.position = new Vector3(transform.position.x, transform.position.y, -10);
         if (closeToCiv || isHoldingCiv)
         {
-            
+
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
                 //grab civilian
                 if (isHoldingCiv == false)
                 {
-                GrabCivilian();
+                    GrabCivilian();
 
                 }
                 else
@@ -55,11 +51,16 @@ public class Player : MonoBehaviour
     public void GrabCivilian()
     {
         if (closeToCiv = false || currentCloseCiv == null) return;
-        currentCloseCiv.transform.position = holdingPosition.transform.position;
-        currentCloseCiv.transform.SetParent(holdingPosition.transform);
         currentholdingCiv = currentCloseCiv;
-        currentCloseCiv.GetComponent<PolygonCollider2D>().enabled = false;
-        currentCloseCiv.GetComponent<Civilian>().isHeldByPlayer = true;
+
+        Civilian civComp = currentholdingCiv.GetComponent<Civilian>();
+
+        civComp.civRB.bodyType = RigidbodyType2D.Kinematic;
+        civComp.isHeldByPlayer = true;
+
+        currentholdingCiv.transform.position = holdingPosition.transform.position;
+        currentholdingCiv.transform.SetParent(holdingPosition.transform);
+
         momentumBar.IncreaseMomentum(amountOfMomentumOnHold);
         AudioManager.instance.Play("Whoosh");
         GetComponent<SpriteRenderer>().sprite = holdingImage;
@@ -72,9 +73,11 @@ public class Player : MonoBehaviour
     {
         isHoldingCiv = false;
         currentholdingCiv.transform.parent = null;
-        currentholdingCiv.AddComponent<Rigidbody2D>().gravityScale = 0;
+
+        Civilian civComp = currentCloseCiv.GetComponent<Civilian>();
+        civComp.civRB.bodyType = RigidbodyType2D.Dynamic;
         currentholdingCiv.GetComponent<Rigidbody2D>().AddForce(transform.up * throwForce);
-        currentholdingCiv.GetComponent<PolygonCollider2D>().enabled = true;
+
         currentholdingCiv = null;
         GetComponent<SpriteRenderer>().sprite = normalImage;
         GameManager.instance.spawnManager.DecreasePoeple();
