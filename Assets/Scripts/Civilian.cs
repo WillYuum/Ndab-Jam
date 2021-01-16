@@ -12,8 +12,12 @@ public class Civilian : MonoBehaviour
     private MomentumManager momentumBar;
     public float amountOfMomentumOnHit = 0.1f;
     public GameObject[] pointsToMove;
+
+    [HideInInspector]
+    public Rigidbody2D civRB;
     private void Start()
     {
+        civRB = GetComponent<Rigidbody2D>();
         delay = startingDelayTime;
         momentumBar = GameManager.instance.GetComponent<MomentumManager>();
         pointsToMove = GameObject.FindGameObjectsWithTag("pointToMove");

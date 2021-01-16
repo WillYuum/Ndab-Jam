@@ -40,10 +40,10 @@ GameObject:
   m_Component:
   - component: {fileID: 5276669647649391103}
   - component: {fileID: 5276669647649391100}
-  - component: {fileID: 5276669647649390595}
-  - component: {fileID: 5276669647649391101}
   - component: {fileID: 1592224288}
   - component: {fileID: 3005479328075634347}
+  - component: {fileID: 5276669647649390595}
+  - component: {fileID: 5276669647649391101}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -116,45 +116,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5276669647649390595
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5276669647649390598}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9cb01e56a9b791e4789b5b3744b9ebaa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  basePlayerSpeed: 10
-  currentPlayerSpeed: 0
-  momentum: {fileID: 0}
---- !u!114 &5276669647649391101
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5276669647649390598}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df15426b0c70eac4d9897ae8ed2b956d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cameraPos: {fileID: 0}
-  startingHealth: 100
-  currentHealth: 0
-  holdingPosition: {fileID: 5276669646628498579}
-  amountOfMomentumOnHold: 0.05
-  amountOfMomentumOnThrow: 0.09
-  isHoldingCiv: 0
-  currentholdingCiv: {fileID: 0}
-  holdingImage: {fileID: 21300000, guid: 95e4986f30461db4daae20c5d61ee6e1, type: 3}
-  normalImage: {fileID: 21300000, guid: e16ec16d258188f489064ac68a943b94, type: 3}
-  throwForce: 800
-  currentCloseCiv: {fileID: 0}
 --- !u!50 &1592224288
 Rigidbody2D:
   serializedVersion: 4
@@ -174,7 +135,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!61 &3005479328075634347
 BoxCollider2D:
@@ -202,3 +163,42 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.23379445, y: 0.26081997}
   m_EdgeRadius: 0
+--- !u!114 &5276669647649390595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5276669647649390598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cb01e56a9b791e4789b5b3744b9ebaa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  basePlayerSpeed: 10
+  currentPlayerSpeed: 5
+  momentum: {fileID: 0}
+--- !u!114 &5276669647649391101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5276669647649390598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df15426b0c70eac4d9897ae8ed2b956d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraPos: {fileID: 0}
+  startingHealth: 100
+  currentHealth: 0
+  holdingPosition: {fileID: 5276669646628498579}
+  amountOfMomentumOnHold: 0.05
+  amountOfMomentumOnThrow: 0.09
+  isHoldingCiv: 0
+  currentholdingCiv: {fileID: 0}
+  holdingImage: {fileID: 21300000, guid: 95e4986f30461db4daae20c5d61ee6e1, type: 3}
+  normalImage: {fileID: 21300000, guid: e16ec16d258188f489064ac68a943b94, type: 3}
+  throwForce: 800
+  currentCloseCiv: {fileID: 0}
