@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8130139538259723328}
   - component: {fileID: 8130139538259724223}
   - component: {fileID: 8130139538259723329}
-  - component: {fileID: 8130139538259723330}
+  - component: {fileID: 2888791531098393156}
   - component: {fileID: 8130139538259723331}
   m_Layer: 0
   m_Name: Civilian (1)
@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8130139538259724222}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.576, y: -1.665, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.012623987, y: 0.012623987, z: 0.012623987}
   m_Children: []
   m_Father: {fileID: 0}
@@ -110,8 +110,8 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 16.68, y: 16.67}
   m_EdgeRadius: 0
---- !u!60 &8130139538259723330
-PolygonCollider2D:
+--- !u!61 &2888791531098393156
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -133,34 +133,9 @@ PolygonCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 5.97, y: 0.685}
-      - {x: 5.49, y: 1.2149999}
-      - {x: 4.4, y: 1.775}
-      - {x: 3.84, y: 1.775}
-      - {x: 3.3799999, y: 1.285}
-      - {x: 3.35, y: 4.4249997}
-      - {x: 2.8, y: 4.9049997}
-      - {x: 2.3, y: 5.455}
-      - {x: 1.24, y: 5.9449997}
-      - {x: 1.22, y: 5.9649997}
-      - {x: -0.35999998, y: 5.9649997}
-      - {x: -1.43, y: 5.4449997}
-      - {x: -1.9599999, y: 4.8849998}
-      - {x: -2.49, y: 4.4249997}
-      - {x: -3.04, y: 1.795}
-      - {x: -3.58, y: 1.735}
-      - {x: -4.58, y: 1.2149999}
-      - {x: -5.66, y: 0.13499999}
-      - {x: -5.66, y: -2.495}
-      - {x: -5.1099997, y: -3.0449998}
-      - {x: -4.5899997, y: -3.595}
-      - {x: -3.6, y: -4.6349998}
-      - {x: 4.42, y: -4.6349998}
-      - {x: 4.94, y: -4.1349998}
-      - {x: 6.52, y: -2.5449998}
-      - {x: 6.52, y: 0.13499999}
+  serializedVersion: 2
+  m_Size: {x: 10, y: 10}
+  m_EdgeRadius: 0
 --- !u!114 &8130139538259723331
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -173,5 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30414af50e732c145bcc45fc8851a418, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player: {fileID: 0}
   amountOfMomentumOnHit: 0.1
+  pointsToMove: []
+  isHeldByPlayer: 0
+  canMove: 0

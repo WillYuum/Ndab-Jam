@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Threading;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class Civilian : MonoBehaviour
@@ -22,11 +20,11 @@ public class Civilian : MonoBehaviour
     }
 
     public bool isHeldByPlayer = false;
-   
+
     private void Update()
     {
         delay -= Time.deltaTime;
-        if(delay <= 0)
+        if (delay <= 0)
         {
             delay = startingDelayTime;
             MoveToAnotherPos();
@@ -35,7 +33,7 @@ public class Civilian : MonoBehaviour
         if (canMove && isHeldByPlayer == false)
         {
             transform.position = Vector2.Lerp(transform.position, selectedPointToGoTo.position, 1 * Time.deltaTime);
-            if(transform.position == selectedPointToGoTo.position)
+            if (transform.position == selectedPointToGoTo.position)
             {
                 canMove = false;
             }
@@ -64,7 +62,7 @@ public class Civilian : MonoBehaviour
     public void MoveToAnotherPos()
     {
         List<GameObject> pointToGoTo = new List<GameObject>();
-        for(int i = 0; i < pointsToMove.Length; i++)
+        for (int i = 0; i < pointsToMove.Length; i++)
         {
             GameObject selectedPoint = pointsToMove[i];
             float distance = Vector2.Distance(transform.position, selectedPoint.transform.position);
@@ -74,7 +72,7 @@ public class Civilian : MonoBehaviour
                 Debug.Log("adding a poin!!!!");
                 amoutToSearchForNextPos += 1;
                 pointToGoTo.Add(selectedPoint);
-                if(amoutToSearchForNextPos >= 2)
+                if (amoutToSearchForNextPos >= 2)
                 {
                     Debug.Log("moving!!!!!!");
                     amoutToSearchForNextPos = 0;
