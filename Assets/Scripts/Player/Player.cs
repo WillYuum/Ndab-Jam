@@ -1,10 +1,13 @@
 ﻿using UnityEngine;
+using Utils.GenericSingletons;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviourSingleton<Player>
 {
 
 
     public GameObject cameraPos;
+
+    public PlayerControls playerControls { get; private set; }
 
     [HideInInspector] public float currentHealth;
 
@@ -13,6 +16,11 @@ public class Player : MonoBehaviour
     private MomentumManager momentumBar;
     public float amountOfMomentumOnHold = 0.05f;
     public float amountOfMomentumOnThrow = 0.09f;
+
+    void Awake()
+    {
+        playerControls = gameObject.GetComponent<PlayerControls>();
+    }
 
     // Start is called before the first frame update
     void Start()

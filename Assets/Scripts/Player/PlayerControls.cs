@@ -2,11 +2,16 @@
 
 public class PlayerControls : MonoBehaviour
 {
-    public float basePlayerSpeed = 3;
+    [SerializeField] private float startingPlayerSpeed = 1.5f;
+    [HideInInspector] public float PlayerSpeed { get; private set; }
     private float currentPlayerSpeed = 2.0f;
     // Rigidbody2D rb;
     public MomentumManager momentum;
 
+    void Awake()
+    {
+        ResetPlayerSpeed();
+    }
 
     void Start()
     {
@@ -41,7 +46,17 @@ public class PlayerControls : MonoBehaviour
     public float HandlePlayerSpeedChangeOnMomentum()
     {
         float momentumValue = momentum.momentumBar.value * 10;
-        float currentSpeed = basePlayerSpeed + momentumValue;
+        float currentSpeed = startingPlayerSpeed + momentumValue;
         return currentSpeed;
+    }
+
+    public void ResetPlayerSpeed()
+    {
+        currentPlayerSpeed = startingPlayerSpeed;
+    }
+
+    public void SlowDownPlayer()
+    {
+        currentPlayerSpeed = 1;
     }
 }

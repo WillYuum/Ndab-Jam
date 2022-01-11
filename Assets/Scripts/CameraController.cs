@@ -1,33 +1,73 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class CameraController : MonoBehaviour
 {
     private Camera cam;
     private float zoomLerpSpeed = 10;
 
+    [SerializeField] private float zoomDuration = 1.0f;
 
-    public float minZoom;
-    public float maxZoom;
-    void Start()
+    private bool isZoomedOut = false;
+
+    [SerializeField] private float minZoom;
+    [SerializeField] private float maxZoom;
+    void Awake()
     {
-        cam = GetComponent<Camera>();
+        cam = Camera.main;
         cam.orthographicSize = minZoom;
     }
 
     //private bool zoomedOut = false;
     void Update()
     {
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (isZoomedOut)
         {
-            cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, maxZoom, Time.deltaTime * zoomLerpSpeed);
-            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControls>().basePlayerSpeed = 1;
+            if (Input.GetKeyUp(KeyCode.LeftShift))
+            {
+                CameraZoomIn();
+            }
         }
-        else
+
+
+        if (isZoomedOut == false)
         {
-            cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, minZoom, Time.deltaTime * zoomLerpSpeed);
-            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControls>().basePlayerSpeed = 3;
+            if (Input.GetKeyDown(KeyCode.LeftShift))
+            {
+                CameraZoomOut();
+            }
         }
+
+    }
+
+
+    private void CameraZoomOut()
+    {
+        isZoomedOut = true;
+        cam
+        .DOOrthoSize(maxZoom, zoomDuration)
+        .SetEase(Ease.InOutSine)
+        .OnComplete(OnZoomOut);
+    }
+
+    private void CameraZoomIn()
+    {
+        isZoomedOut = false;
+        cam
+        .DOOrthoSize(minZoom, zoomDuration)
+        .SetEase(Ease.InOutSine)
+        .OnComplete(OnZoomIn);
+    }
+
+    private void OnZoomOut()
+    {
+        Player.instance.playerControls.SlowDownPlayer();
+    }
+
+    private void OnZoomIn()
+    {
+        Player.instance.playerControls.ResetPlayerSpeed();
     }
 }
