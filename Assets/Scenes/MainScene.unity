@@ -1364,9 +1364,7 @@ MonoBehaviour:
   toiletPaperAmountText: {fileID: 489066958}
   introBackground: {fileID: 657107845}
   gameIsOn: 0
-  WinScreen: {fileID: 1254346212}
   winText: {fileID: 309969057}
-  loseScreen: {fileID: 950623113}
 --- !u!114 &561653080
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3195,7 +3193,7 @@ GameObject:
   - component: {fileID: 950623116}
   - component: {fileID: 950623115}
   m_Layer: 5
-  m_Name: LostGameScreen
+  m_Name: LoseScreen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3631,6 +3629,7 @@ GameObject:
   - component: {fileID: 1255094052}
   - component: {fileID: 1255094051}
   - component: {fileID: 1255094055}
+  - component: {fileID: 1255094056}
   m_Layer: 5
   m_Name: UICanvas
   m_TagString: Untagged
@@ -3740,6 +3739,22 @@ MonoBehaviour:
   - {fileID: 1783041358}
   - {fileID: 1254346212}
   - {fileID: 950623113}
+--- !u!114 &1255094056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1255094050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ced4a250da9002c4e933484d67953fad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameScreen: {fileID: 1783041358}
+  winScreen: {fileID: 1254346212}
+  loseScreen: {fileID: 950623113}
+  introScreen: {fileID: 657107845}
 --- !u!114 &1294806996 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2182099206086026073, guid: 44647d66e172cbf4f94ae38a8aae9d35,
@@ -3904,12 +3919,12 @@ GameObject:
   m_Component:
   - component: {fileID: 1783041359}
   m_Layer: 5
-  m_Name: GameUI
+  m_Name: GameScreen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1783041359
 RectTransform:
   m_ObjectHideFlags: 0

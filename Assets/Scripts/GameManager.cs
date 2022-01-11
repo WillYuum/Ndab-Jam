@@ -10,10 +10,10 @@ public class GameManager : MonoBehaviour
 
     public static GameManager instance = null;
 
-    [HideInInspector]public SpawnManager spawnManager;
+    [HideInInspector] public SpawnManager spawnManager;
 
     public Text gameTimerText;
-    [HideInInspector]public float startingTimer = 5f;
+    [HideInInspector] public float startingTimer = 5f;
     [HideInInspector] public float currentTimer;
 
     private void Awake()
@@ -34,8 +34,8 @@ public class GameManager : MonoBehaviour
         spawnManager = GameManager.instance.GetComponent<SpawnManager>();
         currentTimer = 180f;
         gameTimerText.text = "00:00";
-        WinScreen.SetActive(false);
-        loseScreen.SetActive(false);
+        HUD.instance.ToggleWinScreen(false);
+        HUD.instance.ToggleLoseScreen(false);
     }
 
     void Update()
@@ -61,7 +61,7 @@ public class GameManager : MonoBehaviour
 
         gameTimerText.text = minutes.ToString("00") + ":" + seconds.ToString("00");
 
-        if(minutes <= 1)
+        if (minutes <= 1)
         {
             spawnManager.spawnDelay = 2f;
 
@@ -71,14 +71,14 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        if(seconds <= 30)
+        if (seconds <= 30)
         {
             spawnManager.spawnDelay = 1.5f;
         }
 
-        if(minutes <= 0)
+        if (minutes <= 0)
         {
-            if(seconds <= 0)
+            if (seconds <= 0)
             {
                 WinGame();
             }
@@ -99,22 +99,25 @@ public class GameManager : MonoBehaviour
 
 
     public GameObject introBackground;
-    [HideInInspector]public bool gameIsOn = false;
+    [HideInInspector] public bool gameIsOn = false;
     public void StartGame()
     {
-        WinScreen.SetActive(false);
-        introBackground.SetActive(false);
+        HUD.instance.ToggleWinScreen(false);
+        HUD.instance.ToggleIntroScreen(false);
+        // WinScreen.SetActive(false);
+        // introBackground.SetActive(false);
         AudioManager.instance.Play("Bgm");
         gameIsOn = true;
         StartCoroutine(spawnManager.SpawnEnemies());
     }
 
 
-    public GameObject WinScreen;
+    // public GameObject WinScreen;
     public Text winText;
     public void WinGame()
     {
-        WinScreen.SetActive(true);
+        HUD.instance.ToggleWinScreen(true);
+        // WinScreen.SetActive(true);
         gameIsOn = false;
         winText.text = $"{amountOfPeopleNdab:00} people have been packed and ndabbed and got {toiletPapersCollected:00}";
         AudioManager.instance.Stop("Bgm");
@@ -123,14 +126,14 @@ public class GameManager : MonoBehaviour
     public void RestartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        WinScreen.SetActive(false);
-        loseScreen.SetActive(false);
+        HUD.instance.ToggleWinScreen(false);
+        HUD.instance.ToggleLoseScreen(false);
     }
 
-    public GameObject loseScreen;
+    // public GameObject loseScreen;
     public void LoseGame()
     {
-        loseScreen.SetActive(true);
+        HUD.instance.ToggleLoseScreen(true);
         gameIsOn = false;
     }
 
