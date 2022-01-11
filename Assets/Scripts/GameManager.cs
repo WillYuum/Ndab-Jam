@@ -1,4 +1,5 @@
 ﻿using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,8 @@ public class GameManager : MonoBehaviour
 {
 
     public static GameManager instance = null;
+
+    public event Action<int> OnCollectTP;
 
     [HideInInspector] public SpawnManager spawnManager;
 
@@ -85,16 +88,21 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public GameObject ToiletPaperImage;
+    // public GameObject ToiletPaperImage;
     [HideInInspector] public int toiletPapersCollected = 0;
     int amountOfPeopleNdab = 0;
-    public Text toiletPaperAmountText;
+    // public Text toiletPaperAmountText;
     public void AddToiletPaper(int amount)
     {
-        ToiletPaperImage.transform.DOShakeScale(20 * Time.deltaTime);
+
+        // ToiletPaperImage.transform.DOShakeScale(20 * Time.deltaTime);
         toiletPapersCollected += amount;
         amountOfPeopleNdab += 1;
-        toiletPaperAmountText.text = toiletPapersCollected.ToString("00");
+        // toiletPaperAmountText.text = toiletPapersCollected.ToString("00");
+        if (OnCollectTP != null)
+        {
+            OnCollectTP.Invoke(toiletPapersCollected);
+        }
     }
 
 
@@ -104,6 +112,7 @@ public class GameManager : MonoBehaviour
     {
         HUD.instance.ToggleWinScreen(false);
         HUD.instance.ToggleIntroScreen(false);
+        HUD.instance.ToggleGameScreen(true);
         // WinScreen.SetActive(false);
         // introBackground.SetActive(false);
         AudioManager.instance.Play("Bgm");
